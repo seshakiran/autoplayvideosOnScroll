@@ -1,0 +1,57 @@
+@@ -0,0 +1,56 @@
+<html><head>
+<style>
+#e1, #e2, #e3, #e4, #e5, #ytplayer{ 
+    height:390px; width:640px; display: block;
+    opacity: 0;
+}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '390',
+      width: '640',
+      playerVars : {
+            autoplay : 0
+        },
+      videoId: 'M7lc1UVf-VE'
+    });
+  }
+
+  $(window).scroll(function() {
+    $("iframe").each( function() {
+        if( $(window).scrollTop() > $(this).offset().top - 200 ) {
+            $(this).css('opacity',1);
+            player.mute();
+            player.playVideo();
+        } else {
+            $(this).css('opacity',0);
+            player.stopVideo();
+        }
+    }); 
+});
+
+</script>
+</head>
+<body>
+
+
+
+<div id="e1">Some element 1</div>
+<div id="e2">Some element 2</div>
+<div id="e3">Some element 3</div>
+<div id="ytplayer">Youtube player here</div>
+<div id="e4">Some element 4</div>
+<div id="e5">Some element 5</div>
+</body>
+</html> 
